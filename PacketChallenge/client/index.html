@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Secure Packet Challenge Client</title>
+</head>
+<body>
+  <h1>Send Packet</h1>
+  <textarea id="dataText" rows="4" cols="50">flag_request:stage1</textarea><br />
+  <button id="sendBtn">Send Packet</button>
+  <pre id="response"></pre>
+  <script>
+    async function sendPacket() {
+      const dataText = document.getElementById('dataText').value;
+      // Build the packet data to send to your backend endpoint.
+      // But your backend expects encrypted, signed packets with rotated AES keys,
+      // which require Node.js crypto — unavailable in the browser.
+      // So: you can create a new endpoint on the server that accepts
+      // plaintext `dataText` and builds the packet on your server side.
+      // Or use a frontend JS crypto library (harder).
+      // For simplicity, send raw dataText and let the server handle building packets:
+      const res = await fetch('/send-packet', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ dataText })
+      });
+      const json = await res.json();
+      document.getElementById('response').textContent = JSON.stringify(json, null, 2);
+    }
+    document.getElementById('sendBtn').onclick = sendPacket;
+  </script>
+</body>
+</html>

@@ -1,0 +1,14 @@
+{
+  "issuedTokens": [
+    {
+      "token": "ct_987123",
+      "issuedAt": 1691176000,
+      "expiresAt": 1691176600,
+      "used": false
+    }
+  ],
+  "flagsUnlocked": {
+    "user1": ["stage1"],
+    "user2": []
+  }
+}
